@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="64" fill="#0a0f1a"/>
+  <rect x="8" y="8" width="496" height="496" rx="56" fill="none" stroke="#00ff88" stroke-width="4" opacity="0.3"/>
+  <rect x="80" y="60" width="352" height="280" rx="12" fill="#0d1321" stroke="#1e2a3a" stroke-width="3"/>
+  <rect x="92" y="72" width="328" height="256" rx="8" fill="#0a0f1a"/>
+  <g fill="#00ff88" opacity="0.9">
+    <rect x="110" y="95" width="40" height="40" rx="4"/>
+    <rect x="170" y="95" width="40" height="40" rx="4" fill="#4ecdc4"/>
+    <rect x="230" y="95" width="40" height="40" rx="4" fill="#ffe66d"/>
+    <rect x="110" y="155" width="40" height="40" rx="4" fill="#95e1d3"/>
+    <rect x="170" y="155" width="40" height="40" rx="4" fill="#dda0dd"/>
+    <rect x="230" y="155" width="40" height="40" rx="4" fill="#f8b500"/>
+    <rect x="110" y="215" width="40" height="40" rx="4" fill="#6c5ce7"/>
+    <rect x="170" y="215" width="40" height="40" rx="4" fill="#e17055"/>
+    <rect x="230" y="215" width="120" height="40" rx="4" fill="#1e2a3a" stroke="#00ff88" stroke-width="2"/>
+  </g>
+  <g font-family="'JetBrains Mono', monospace" font-size="14" fill="#00ff88" opacity="0.7">
+    <text x="245" y="240">> agent:start</text>
+    <text x="245" y="258">> task:assigned</text>
+  </g>
+  <rect x="236" y="340" width="40" height="8" rx="2" fill="#1e2a3a"/>
+  <rect x="216" y="348" width="80" height="12" rx="3" fill="#1e2a3a"/>
+  <rect x="200" y="360" width="112" height="6" rx="2" fill="#0d1321"/>
+  <text x="256" y="420" font-family="'Space Grotesk', sans-serif" font-size="48" font-weight="700" fill="#00ff88" text-anchor="middle" letter-spacing="4">AI SPY</text>
+  <defs>
+    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="4" height="4">
+      <line x1="0" y1="0" x2="4" y2="0" stroke="#000" stroke-width="1" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" rx="64" fill="url(#scanlines)"/>
+</svg>
