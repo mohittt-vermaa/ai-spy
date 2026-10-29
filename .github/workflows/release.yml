@@ -25,15 +25,19 @@ jobs:
           - os: ubuntu-latest
             artifact_name: linux
             build_script: build:linux
-            output_pattern: 'release/*.AppImage release/*.deb'
+            output_pattern: |
+              release/*.AppImage
+              release/*.deb
           - os: windows-latest
             artifact_name: windows
             build_script: build:win
-            output_pattern: 'release/*.exe'
+            output_pattern: release/*.exe
           - os: macos-latest
             artifact_name: macos
             build_script: build:mac
-            output_pattern: 'release/*.dmg release/*.zip'
+            output_pattern: |
+              release/*.dmg
+              release/*.zip
     steps:
       - name: Checkout
         uses: actions/checkout@v4
