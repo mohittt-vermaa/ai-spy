@@ -30,14 +30,19 @@
     "release": "gh release create v$npm_package_version dist/*.exe dist/*.dmg dist/*.AppImage dist/*.apk dist/*.ipa --title \"AI Spy v$npm_package_version\" --notes-file RELEASE_NOTES.md"
   },
   "dependencies": {
+    "chokidar": "^3.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ws": "^8.16.0",
     "uuid": "^9.0.0",
-    "chokidar": "^3.5.3",
+    "ws": "^8.16.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/cli": "^5.0.0",
+    "@capacitor/core": "^5.0.0",
+    "@capacitor/ios": "^5.0.0",
+    "@electron/notarize": "^2.0.0",
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
@@ -46,16 +51,12 @@
     "@types/yargs": "^17.0.0",
     "@vitejs/plugin-react": "^4.2.0",
     "concurrently": "^8.2.0",
-    "tsx": "^4.7.0",
-    "typescript": "^5.3.0",
-    "vite": "^5.0.0",
     "electron": "^28.0.0",
     "electron-builder": "^24.0.0",
-    "@capacitor/core": "^5.0.0",
-    "@capacitor/cli": "^5.0.0",
-    "@capacitor/android": "^5.0.0",
-    "@capacitor/ios": "^5.0.0",
-    "@electron/notarize": "^2.0.0"
+    "sharp": "^0.35.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "vite": "^5.0.0"
   },
   "build": {
     "appId": "com.aispy.app",
@@ -73,11 +74,17 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         },
         {
           "target": "zip",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
       ],
       "hardenedRuntime": true,
@@ -90,11 +97,17 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64", "ia32"]
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         },
         {
           "target": "portable",
-          "arch": ["x64", "ia32"]
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         }
       ],
       "requestedExecutionLevel": "asInvoker"
@@ -103,16 +116,22 @@
       "target": [
         {
           "target": "AppImage",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         },
         {
           "target": "deb",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
       ],
       "category": "Development"
     },
-    "afterSign": "build/notarize.js",
+    "afterPack": "build/notarize.js",
     "publish": [
       {
         "provider": "github",
