@@ -1,8 +1,10 @@
 {
   "name": "ai-spy",
   "version": "1.0.0",
-  "description": "Real-time AI Agent Office - Mission Control Dashboard for Claude Code agents",
+  "description": "Real-time AI Agent Office - Mission Control Dashboard for AI agents",
   "main": "dist/main/index.js",
+  "author": "Mohit Verma <mohittt.verma@gmail.com>",
+  "homepage": "https://github.com/mohittt-vermaa/ai-spy",
   "scripts": {
     "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
     "dev:renderer": "vite",
@@ -17,10 +19,17 @@
     "tauri": "tauri",
     "capacitor:add": "cap add android",
     "capacitor:build": "cap build android",
-    "capacitor:run": "cap run android"
+    "capacitor:run": "cap run android",
+    "build:win": "electron-builder --win --x64 --ia32",
+    "build:mac": "electron-builder --mac --x64 --arm64",
+    "build:linux": "electron-builder --linux AppImage deb",
+    "build:all": "npm run build && npm run build:win && npm run build:mac && npm run build:linux",
+    "capacitor:ios": "cap add ios",
+    "capacitor:build:ios": "cap build ios",
+    "capacitor:build:android": "cap build android",
+    "release": "gh release create v$npm_package_version dist/*.exe dist/*.dmg dist/*.AppImage dist/*.apk dist/*.ipa --title \"AI Spy v$npm_package_version\" --notes-file RELEASE_NOTES.md"
   },
   "dependencies": {
-    "electron": "^28.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "ws": "^8.16.0",
@@ -40,10 +49,13 @@
     "tsx": "^4.7.0",
     "typescript": "^5.3.0",
     "vite": "^5.0.0",
+    "electron": "^28.0.0",
     "electron-builder": "^24.0.0",
     "@capacitor/core": "^5.0.0",
     "@capacitor/cli": "^5.0.0",
-    "@capacitor/android": "^5.0.0"
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/ios": "^5.0.0",
+    "@electron/notarize": "^2.0.0"
   },
   "build": {
     "appId": "com.aispy.app",
@@ -57,14 +69,56 @@
       "output": "release"
     },
     "mac": {
-      "category": "public.app-category.developer-tools"
+      "category": "public.app-category.developer-tools",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "notarize": false
     },
     "win": {
-      "target": "nsis"
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "ia32"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64", "ia32"]
+        }
+      ],
+      "requestedExecutionLevel": "asInvoker"
     },
     "linux": {
-      "target": "AppImage",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "deb",
+          "arch": ["x64", "arm64"]
+        }
+      ],
       "category": "Development"
-    }
+    },
+    "afterSign": "build/notarize.js",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "mohittt-vermaa",
+        "repo": "ai-spy"
+      }
+    ]
   }
 }
